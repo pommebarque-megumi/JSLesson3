@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSLesson5</title>
+    <style>
+        body{
+            background-color:#ddf5ff;
+        }
+        #container{
+            text-align:center;
+            color:#444;
+        }
+        #table{
+            width:90%;
+            margin:auto;
+            background-color:#fff;
+            
+        }
+        #table>tr>td{
+            padding:10px;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+    <h1>九九クイズに挑戦しよう</h1>
+    <p>
+        ３回間違えると青くなって答えが表示されるよ。<br>
+        チャレンジしてみよう！
+    </p>
+    <table id="table" border="1"></table>
+    <script>
+        window.onload = function(){
+            const table = document.querySelector("#table");
+            for(let i=1 ; i<=9 ; i++){
+                let tr = document.createElement('tr');
+                for(let j=1 ; j<=9 ; j++){
+                    let td = document.createElement('td');
+                    td.textContent = `${i}×${j}`;
+                    td.x=i;
+                    td.y=j;
+                    td.ans=i*j;
+                    td.uncorrect=0;
+                    td.addEventListener("mouseenter",(e)=>{
+                        e.target.style.textDecoration="underline";
+                    })
+                    td.addEventListener("mouseleave",(e)=>{
+                        e.target.style.textDecoration="none";
+                    })
+                    td.addEventListener("click",(e)=>{
+                        let selectedTd = e.target;
+                        const userAns = window.prompt(`${selectedTd.x}×${selectedTd.y}`);
+                        e.target.style.textDecoration="none";
+                        if(selectedTd.ans == parseInt(userAns)){
+                            selectedTd.style.backgroundColor = "#999";
+                            //selectedTd.textContent = `${selectedTd.x}×${selectedTd.y}=${selectedTd.ans}`;
+                            selectedTd.textContent = `${selectedTd.ans}`;
+                        }else{
+                            selectedTd.uncorrect +=1;
+                            selectedTd.style.backgroundColor = "#6d9bff";
+                            if(selectedTd.uncorrect >= 3){
+                                selectedTd.style.backgroundColor = "blue";
+                                selectedTd.style.color = "#fff";
+                                selectedTd.textContent = `${selectedTd.ans}`;
+                            }
+                        }
+                    })
+                    tr.append(td);
+                }
+                table.append(tr);
+            }
+        }
+    </script>
+    </div>
+</body>
+</html>

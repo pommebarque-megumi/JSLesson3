@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="msg">Hello</p>
+   <script>
+    const msg = document.querySelector("#msg")
+    window.onload = ()=>{
+        //window.alert("本当に実行しますか？");
+        if(window.confirm("本当に実行しますか？")){
+            msg.textContent="SORRY";
+        }else{
+            msg.textContent="THANK YOU";
+        }
+        let ans = window.prompt("How old are you?");
+        if(ans >= 20){
+            msg.textContent = "大人ですね";
+        }else{
+            msg.textContent = "子どもですね";
+        }
+    };
+        document.addEventListener("DOMContentLoaded",()=>{
+            console.log("DOMContentLoaded");
+            msg.textContent = "Hello";
+        });
+   </script> 
+</body>
+</html>
